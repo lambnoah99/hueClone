@@ -1,0 +1,7 @@
+{
+  "name": "hueClone",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
