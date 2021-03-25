@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Group</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" (click)="modalCtrl.dismiss()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-input maxlength="32" placeholder="..." (ionChange)="name = $event.detail.value"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Type</ion-label>
+    <ion-select (ionChange)="type = $event.detail.value">
+      <ion-select-option value="Room">Room</ion-select-option>
+      <ion-select-option value="Zone">Zone</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select (ionChange)="category = $event.detail.value">
+      <ion-select-option value="Living room">Living Room</ion-select-option>
+      <ion-select-option value="Kitchen">Kitchen</ion-select-option>
+      <ion-select-option value="Dining">Dining</ion-select-option>
+      <ion-select-option value="Bedroom">Bedroom</ion-select-option>
+      <ion-select-option value="Kids bedroom">Kids bedroom</ion-select-option>
+      <ion-select-option value="Bathroom">Bathroom</ion-select-option>
+      <ion-select-option value="Nursery">Nursery</ion-select-option>
+      <ion-select-option value="Recreation">Recreation</ion-select-option>
+      <ion-select-option value="Office">Office</ion-select-option>
+      <ion-select-option value="Gym">Gym</ion-select-option>
+      <ion-select-option value="Hallway">	Hallway</ion-select-option>
+      <ion-select-option value="Toilet">Toilet</ion-select-option>
+      <ion-select-option value="Front door">Front door</ion-select-option>
+      <ion-select-option value="Garage">Garage</ion-select-option>
+      <ion-select-option value="Terrace">Terrace</ion-select-option>
+      <ion-select-option value="Garden">Garden</ion-select-option>
+      <ion-select-option value="Driveway">Driveway</ion-select-option>
+      <ion-select-option value="Carport">Carport</ion-select-option>
+      <ion-select-option value="Other">Other</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div *ngIf="lights">
+    <ion-list>
+      <ion-item *ngFor="let light of lights | keyvalue">
+        <ion-label>{{ light.value.name }}</ion-label>
+        <ion-checkbox (ionChange)="arrayChange($event.detail.checked, light.key)"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="submit()">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div *ngIf="!lights"></div>
+  <pre>{{ selectedLights | json }}</pre>
+</ion-content>

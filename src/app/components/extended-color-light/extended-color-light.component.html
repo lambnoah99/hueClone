@@ -1,0 +1,46 @@
+<ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="9" (click)="editEvent.emit( [ light, id ] )">
+        <h3>{{ light.name }}</h3>
+        <ion-text *ngIf="!light.state.reachable">Not reachable</ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-toggle checked="{{ light.state.on }}" disabled="{{ !light.state.reachable}}" (ionChange)="changeLight(id, 'on' ,$event.srcElement.value)" class="ion-float-right"></ion-toggle>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card-content *ngIf="light.state.on && light.state.reachable">
+      <ion-range 
+        min="1" 
+        max="255" 
+        step="1" 
+        value="{{ light.state.bri }}" 
+        (ionFocus)="this.allowedEvent.emit(false)"
+        class="dimmable"
+        (ionBlur)="changeLight(id, 'bri' ,$event.srcElement.value)"
+        [style.--bar-background]="hueToBriGradient(light.state.hue)">
+      </ion-range>
+      <ion-range 
+        min="1" 
+        max="255" 
+        step="1" 
+        value="{{ light.state.sat }}"
+        pin="true"
+        (ionFocus)="this.allowedEvent.emit(false)"
+        (ionBlur)="changeLight(id, 'sat' ,$event.srcElement.value)"
+        class="saturation"
+        [style.--bar-background]="hueToSatGradient(light.state.hue)">
+      </ion-range>
+      <ion-range 
+        min="0" 
+        max="65535" 
+        step="100" 
+        value="{{ light.state.hue }}"
+        (ionFocus)="this.allowedEvent.emit(false)"
+        debounce="500"
+        (ionChange)="changeLight(id, 'hue' ,$event.srcElement.value)"
+        class="hue">
+      </ion-range>
+  </ion-card-content>
+</ion-card>

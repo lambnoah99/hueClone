@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ light.name }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" (click)="dismiss()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Name: </ion-label>
+      <ion-input value=" {{ light.name }}" debounce="1000" (ionChange)="changeName($event.detail.value)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Type: {{ light.type }}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Manfuacturer: {{ light.manufacturername }}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Productname: {{ light.productname }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

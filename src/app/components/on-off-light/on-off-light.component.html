@@ -1,0 +1,13 @@
+<ion-card [ngClass]="{ 'on' : light.state.on && light.state.reachable}">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="9" (click)="editEvent.emit( [ light, id ] )">
+        <h3>{{ light.name }}</h3>
+        <ion-text *ngIf="!light.state.reachable">Not reachable</ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-toggle checked="{{ light.state.on }}" disabled="{{ !light.state.reachable}}" (ionChange)="changeLight(id, $event.detail.checked)" class="ion-float-right"></ion-toggle>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Rooms</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="rooms">
+    <div *ngFor="let room of rooms | async | keyvalue">
+      <ion-card *ngIf="room.value.type === 'Room' || room.value.type == 'Zone'" [ngClass]="{ 'on': room.value.state.any_on}">
+        <ion-card-header>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="10" [routerLink]="['./group', room.key]" button="true">
+                <h3>
+                  {{ room.value.name }} 
+                </h3>
+              </ion-col>
+              <ion-col size="2">
+                <ion-toggle checked="{{ room.value.state.any_on }}" (ionChange)="changeGroupState(room.key, 'on', $event.detail.checked)" class="ion-float-right"></ion-toggle>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-header>
+        <ion-badge class="top-left-edge">
+          {{ room.value.lights.length }}
+        </ion-badge>
+        <ion-range value="{{ room.value.action.bri }}" (ionChange)="changeGroupState(room.key, 'bri', $event.detail.value)" debounce="500" min="1" max="255"></ion-range>
+      </ion-card>
+    </div>
+  </div>
+  <div *ngIf="!rooms">
+    <ion-card>
+      <ion-skeleton-text></ion-skeleton-text>
+    </ion-card>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

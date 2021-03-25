@@ -1,0 +1,29 @@
+ion-range {
+    --bar-height: 15px;
+    --bar-border-radius: 12px;
+    --knob-background: #ddd;
+    --bar-background-active: none;
+    --knob-size: 32px;
+    --knob-box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
+    transition: 0.4s;
+}
+ion-range.dimmable {
+    --bar-background: linear-gradient(to right, #64642d, #ffff77);
+}
+ion-range.color-temp {
+    --bar-background: linear-gradient(to right, #99ffff, #ffff77);
+}
+
+ion-range.saturation {
+    --bar-height: 15px;
+    --bar-background-active: none;
+    --bar-border-radius: 12px;
+    --knob-background: #ddd;
+    --knob-size: 32px;
+    --knob-box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
+}
+
+ion-range.hue {
+    --bar-background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(50, 100%, 50%), hsl(100, 100%, 50%),  hsl(150, 100%, 50%),  hsl(200, 100%, 50%), hsl(250, 100%, 50%), hsl(300, 100%, 50%), hsl(350, 100%, 50%));
+    transition: 0.4s;
+}

@@ -1,0 +1,31 @@
+<ion-card [style.background]="light.state.on ? 'rgba(255, 255, 119, 1)' : 'rgba(255, 255, 119, 0.0)'">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="9" (click)="editEvent.emit( [ light, id ] )">
+        <h3>{{ light.name }}</h3>
+        <ion-text *ngIf="!light.state.reachable">Not reachable</ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-toggle 
+          checked="{{ light.state.on }}"
+          disabled="{{ !light.state.reachable}}"
+          (ionFocus)="this.allowedEvent.emit(false)"
+          (ionChange)="changeLight(id, 'on', $event.detail.checked)"
+          class="ion-float-right">
+        </ion-toggle>
+      </ion-col>
+    </ion-row>
+    <ion-card-content *ngIf="light.state.on && light.state.reachable">
+      <ion-range 
+        min="1" 
+        max="255" 
+        step="1" 
+        value="{{ light.state.bri }}" 
+        debounce="500"
+        (ionFocus)="this.allowedEvent.emit(false)"
+        (ionChange)="changeLight(id, 'bri', $event.detail.value)"
+        class="dimmable">
+      </ion-range>
+    </ion-card-content>
+  </ion-grid>
+</ion-card>

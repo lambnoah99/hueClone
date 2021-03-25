@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="isReady">{{ group.name }}</ion-title>
+    <ion-skeleton-text *ngIf="!isReady"></ion-skeleton-text>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tabs/rooms"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isReady === true">
+
+    <div *ngIf="activeSegment == 'scenes'" class="ion-margin-top">
+      <ion-grid>
+        <ion-row>
+          <div *ngFor="let scene of scenes | keyvalue; let i = index">
+            <ion-col size="6" *ngIf="scene.value.group == groupId">
+              <ion-card class="ion-float-left ion-text-center scene-card bg-{{ i }}"(click)="setScene(scene.key)">
+                <ion-card-header>
+                  {{ scene.value.name }}
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="activeSegment == 'lights'">
+      <div *ngFor="let light of lights | keyvalue">
+        <div *ngIf="group.lights.includes(light.key)">
+          <div [ngSwitch]="light.value.type">
+            <!--On-Off-Light-->
+            <div *ngSwitchCase="'On/Off plug-in unit'">
+              <app-on-off-light [key]="light.key" [light]="light.value"></app-on-off-light>
+            </div>
+            <!--Dimmable-Light-->
+            <div *ngSwitchCase="'Dimmable light'">
+              <app-dimmable-light [key]="light.key" [light]="light.value" (allowedEvent)="this.allowedToRefresh = $event"></app-dimmable-light>
+            </div>
+
+            <div *ngSwitchCase="'Color temperature light'">
+              <app-color-temperature-light [key]="light.key" [light]="light.value" (allowedEvent)="this.allowedToRefresh = $event"></app-color-temperature-light>
+            </div>
+            <!--Extended-Color-Light-->
+            <div *ngSwitchCase="'Extended color light'">
+              <app-extended-color-light [key]="light.key" [light]="light.value" (allowedEvent)="this.allowedToRefresh = $event"></app-extended-color-light>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activeSegment == 'information'">
+      <ion-list>
+        <ion-item>
+          <ion-label>Name</ion-label>
+          <ion-input value="{{ group.name }}" maxlength="32" minlength="1" (ionChange)="changeAttributes('name', $event.detail.value)" debounce="3000"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Category</ion-label>
+          <ion-select value="{{ group.class }}" (ionChange)="changeAttributes('class', $event.detail.value)">
+            <ion-select-option value="Living room">Living Room</ion-select-option>
+            <ion-select-option value="Kitchen">Kitchen</ion-select-option>
+            <ion-select-option value="Dining">Dining</ion-select-option>
+            <ion-select-option value="Bedroom">Bedroom</ion-select-option>
+            <ion-select-option value="Kids bedroom">Kids bedroom</ion-select-option>
+            <ion-select-option value="Bathroom">Bathroom</ion-select-option>
+            <ion-select-option value="Nursery">Nursery</ion-select-option>
+            <ion-select-option value="Recreation">Recreation</ion-select-option>
+            <ion-select-option value="Office">Office</ion-select-option>
+            <ion-select-option value="Gym">Gym</ion-select-option>
+            <ion-select-option value="Hallway">	Hallway</ion-select-option>
+            <ion-select-option value="Toilet">Toilet</ion-select-option>
+            <ion-select-option value="Front door">Front door</ion-select-option>
+            <ion-select-option value="Garage">Garage</ion-select-option>
+            <ion-select-option value="Terrace">Terrace</ion-select-option>
+            <ion-select-option value="Garden">Garden</ion-select-option>
+            <ion-select-option value="Driveway">Driveway</ion-select-option>
+            <ion-select-option value="Carport">Carport</ion-select-option>
+            <ion-select-option value="Other">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" color="danger" (ionClick)="this.hue.deleteGroup(group.key)">Delete Group</ion-button>
+    </div>
+  </div>
+
+  <div *ngIf="isReady === false">
+    <ion-list>
+      <ion-item>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="activeSegment === 'lights'">
+    <ion-fab-button (click)="presentLightEditModal()">
+      <ion-icon name="pencil"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-segment value="scenes" (ionChange)="changeSegment($event.detail.value)" swipeGesture="true">
+    <ion-segment-button value="scenes">
+      <ion-label>Scenes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="lights">
+      <ion-label>Lights</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="information">
+      <ion-label>Information</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>

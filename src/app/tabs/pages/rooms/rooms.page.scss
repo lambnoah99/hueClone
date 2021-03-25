@@ -1,0 +1,31 @@
+.scene-card {
+    width: 40%;
+    height: 80px;
+}
+
+.top-left-edge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    border-radius: 50%;
+}
+
+.on {
+    background: linear-gradient(30deg, #99FFFF, #FFFF99);
+}
+
+ion-range {
+    padding: 0 20px!important;
+    --bar-height: 15px;
+    --bar-border-radius: 12px;
+    --knob-background: #ddd;
+    --knob-size: 32px;
+    --knob-box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
+    --bar-background-active: rgba(255, 255, 255, 0.4);
+    transition: 0.4s;
+    --bar-background: linear-gradient(to right, #64642d, #ffff77);
+
+}
+ion-range::part(bar) {
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+}

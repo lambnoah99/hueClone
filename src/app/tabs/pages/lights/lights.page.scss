@@ -1,0 +1,29 @@
+.light {
+    transition: 0.4s;
+}
+.light-off {
+    background: #333333!important;
+}
+
+.onOffPlug-on{
+    background: #FFFF99;
+}
+ion-grid {
+    --ion-grid-padding: 0;
+}
+ion-row {
+    margin: 0!important;
+    padding: 0!important;
+}
+ion-col {
+    margin: 0!important;
+    padding: 0!important;
+}
+ion-toggle {
+    margin-top: 12px;
+}
+
+ion-range.loader {
+    --knob-size: 1px;
+
+}

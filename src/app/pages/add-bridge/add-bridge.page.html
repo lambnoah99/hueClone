@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add your Bridge</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p class="ion-text-center">Enter an IP-Adress or select one of the auto-discovered Bridges</p>
+
+  <h3 class="ion-padding">Discovered Bridges</h3>
+  <div *ngFor="let bridge of this.discoveredBridges | async">
+    <ion-item detail (click)="addBridge(bridge.internalipaddress)">
+      <ion-label>
+        {{ bridge.internalipaddress }}
+      </ion-label>
+    </ion-item>
+  </div>
+
+  <h3 class="ion-padding">Manual IP</h3>
+  <ion-input [(ngModel)]="ipInput" placeholder="IP"></ion-input>
+
+</ion-content>
+<ion-footer>
+  <ion-button (click)="addBridge(this.ipInput)" expand="full">Add Bridge</ion-button>
+</ion-footer>

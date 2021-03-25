@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Lights</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="lights">
+    <div *ngFor="let light of lights | keyvalue">
+      <!--Switch-->
+      <div [ngSwitch]="light.value.type">
+        <!--On-Off-Light-->
+        <app-on-off-light *ngSwitchCase="'On/Off plug-in unit'" [key]="light.key" [light]="light.value" (edit)="openModal($event)"></app-on-off-light>
+        <!--Dimmable-Light-->
+        <app-dimmable-light *ngSwitchCase="'Dimmable light'" [key]="light.key" [light]="light.value" (allowedEvent)="this.allowedToRefresh = $event" (edit)="openModal($event)"></app-dimmable-light>
+        <!--color-temperature-light-->
+        <app-color-temperature-light *ngSwitchCase="'Color temperature light'" [key]="light.key" [light]="light.value" (allowedEvent)="this.allowedToRefresh = $event" (edit)="openModal($event)"></app-color-temperature-light>
+        <!--Extended-Color-Light-->
+        <app-extended-color-light *ngSwitchCase="'Extended color light'" [key]="light.key" [light]="light.value" (allowedEvent)="this.allowedToRefresh = $event" (edit)="openModal($event)"></app-extended-color-light>
+      </div>
+    </div>
+  </div>
+  <ion-list *ngIf=!lights>
+      <ion-card class="ion-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-skeleton-text animated style="width: 50%; height: 30px;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col>
+              <ion-toggle disabled="true" class="ion-float-right"></ion-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-range min="0" max="100" disabled="true" value="60" class="loader">
+            </ion-range>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card class="ion-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-skeleton-text animated style="width: 50%; height: 30px;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col>
+              <ion-toggle disabled="true" class="ion-float-right"></ion-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-range min="0" max="100" disabled="true" value="60" class="loader">
+            </ion-range>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card class="ion-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-skeleton-text animated style="width: 50%; height: 30px;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col>
+              <ion-toggle disabled="true" class="ion-float-right"></ion-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-range min="0" max="100" disabled="true" value="60" class="loader">
+            </ion-range>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card class="ion-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-skeleton-text animated style="width: 50%; height: 30px;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col>
+              <ion-toggle disabled="true" class="ion-float-right"></ion-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-range min="0" max="100" disabled="true" value="60" class="loader">
+            </ion-range>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card class="ion-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-skeleton-text animated style="width: 50%; height: 30px;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col>
+              <ion-toggle disabled="true" class="ion-float-right"></ion-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-range min="0" max="100" disabled="true" value="60" class="loader">
+            </ion-range>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-card class="ion-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-skeleton-text animated style="width: 50%; height: 30px;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col>
+              <ion-toggle disabled="true" class="ion-float-right"></ion-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-range min="0" max="100" disabled="true" value="60" class="loader">
+            </ion-range>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+  </ion-list>
+</ion-content>
